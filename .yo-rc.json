@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.hibuz.uaa",
+      "nativeLanguage": "ko"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "uaa",
+    "baseName": "uaa",
+    "packageName": "com.hibuz.uaa",
+    "packageFolder": "com/hibuz/uaa",
+    "serverPort": "9999",
+    "authenticationType": "uaa",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mariadb",
+    "searchEngine": "elasticsearch",
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "MGQ3MjU2YjE4YzEyMWM3MDc3NWEzYTljZmU5MDNjYjYwMDk2ZDZiYmZmNzA0YzI5ZWNjMDlhZmM1YTNmYzIyNDlkMmE3ZWVlZjZmM2U2NDMzOWZiMDEwNGQwOTcxYWE5MjBiZTQ4Mjg1MThmZjQ3MmFjOGVkOWRjYTNiNWE4ZDY=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1582607722258,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "ko",
+    "languages": ["ko", "en"],
+    "blueprints": [],
+    "skipClient": true
+  }
+}
