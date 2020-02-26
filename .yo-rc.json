@@ -46,6 +46,8 @@
     "kubernetesStorageClassName": "",
     "ingressDomain": "k8s.hibuz.com",
     "monitoring": "elk",
-    "istio": true
+    "istio": true,
+    "gatewayType": "zuul",
+    "consoleOptions": ["curator", "zipkin"]
   }
 }
