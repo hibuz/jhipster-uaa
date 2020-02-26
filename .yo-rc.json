@@ -35,6 +35,17 @@
     "nativeLanguage": "ko",
     "languages": ["ko", "en"],
     "blueprints": [],
-    "skipClient": true
+    "skipClient": true,
+    "appsFolders": ["app", "gateway", "uaa"],
+    "directoryPath": "../",
+    "clusteredDbApps": ["app"],
+    "dockerRepositoryName": "hibuz",
+    "dockerPushCommand": "docker push",
+    "kubernetesNamespace": "default",
+    "kubernetesUseDynamicStorage": true,
+    "kubernetesStorageClassName": "",
+    "ingressDomain": "k8s.hibuz.com",
+    "monitoring": "elk",
+    "istio": true
   }
 }

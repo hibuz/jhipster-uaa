@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uaa-mariadb-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: uaa-mariadb
+  namespace: default
+  labels:
+    app: uaa-mariadb
+type: Opaque
+data:
+  mariadb-root-password: N2RhNmYxYzJhM2VhN2UzMzgzZTgxYzJlMWY5MTA3ZTRiOGZjYjgzNWU5MzJhODVkZGUxNTgwNGFiMGQw
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uaa-mariadb
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uaa-mariadb
+  template:
+    metadata:
+      labels:
+        app: uaa-mariadb
+      annotations:
+        sidecar.istio.io/inject: 'false'
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: uaa-mariadb-pvc
+      containers:
+        - name: mariadb
+          image: mariadb:10.4.12
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: uaa-mariadb
+                  key: mariadb-root-password
+            - name: MYSQL_DATABASE
+              value: uaa
+          #        command:
+          #        - mysqld
+          #        - --lower_case_table_names=1
+          #        - --skip-ssl
+          #        - --character_set_server=utf8mb4
+          #        - --explicit_defaults_for_timestamp
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql/
+          resources:
+            requests:
+              memory: '512Mi'
+              cpu: '500m'
+            limits:
+              memory: '1Gi'
+              cpu: '1'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uaa-mariadb
+  namespace: default
+spec:
+  selector:
+    app: uaa-mariadb
+  ports:
+    - port: 3306

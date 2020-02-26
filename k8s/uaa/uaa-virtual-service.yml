@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: uaa-virtualservice
+  namespace: default
+spec:
+  hosts:
+    - uaa
+  http:
+    - route:
+        - destination:
+            host: uaa
+            subset: 'v1'
+          weight: 100
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
